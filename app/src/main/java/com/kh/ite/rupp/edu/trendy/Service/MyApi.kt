@@ -1,14 +1,19 @@
 package com.kh.ite.rupp.edu.trendy.Service
 
 import android.content.Context
+import com.kh.ite.rupp.edu.trendy.Model.ProductListModel
 import com.kh.ite.rupp.edu.trendy.Service.intercepter.NetworkConnectionInterceptor
 import com.kh.ite.rupp.edu.trendy.Service.intercepter.TokenInterceptor
 import okhttp3.OkHttpClient
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.http.GET
 
 interface MyApi {
 
+    @GET("productsV2")
+    suspend fun getAllProduct(): Response<ProductListModel>
 
     companion object{
         operator fun invoke(

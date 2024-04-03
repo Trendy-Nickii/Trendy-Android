@@ -21,4 +21,32 @@
     <string name="subtitle">Sign in to access your personalized fashion.</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
+    <string name="remember_me">Remember me</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="don_t_have_an_account">Don\'t have an account?</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="join_trendy_today">Join Trendy Today 👤</string>
+    <string name="sign_up_subtitle">Embark on a fashion journey tailored for you.</string>
+    <string name="phone_number_hint">Phone number</string>
+    <string name="phone">Phone</string>
+    <string name="optional">(Optional *)</string>
+    <string name="terms_conditions"><![CDATA[Terms & Conditions.]]></string>
+    <string name="i_agree_to_trendy">I agree to Trendy</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="firstname">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="setting">Setting</string>
+    <string name="notification">Notification</string>
+    <string name="app_appearance">App Appearance</string>
+    <string name="data_analytics"><![CDATA[Data & Analytics]]></string>
+    <string name="help_support"><![CDATA[Help & Support]]></string>
+    <string name="logout">Logout</string>
+    <string name="price">US $%s</string>
+    <string name="price2">$%s</string>
+
+    <string name="copyright">© 2024 Trendy Team. All rights reserved.</string>
+    <string name="hot_deals_this_week">Hot Deals This Week</string>
 </resources>

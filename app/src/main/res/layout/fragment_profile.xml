@@ -31,7 +31,7 @@
                 android:textColor="@color/txt_black"
                 android:textStyle="bold"
                 android:textSize="22sp"
-                android:fontFamily="@font/roboto_medium"
+                android:fontFamily="@font/roboto_regular"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginHorizontal="10dp"
@@ -105,7 +105,7 @@
                             <TextView
                                 android:id="@+id/user_phone"
                                 android:text="@string/phone_number"
-                                android:fontFamily="@font/roboto_medium"
+                                android:fontFamily="@font/roboto_regular"
                                 android:textSize="14sp"
                                 android:gravity="bottom"
                                 android:textColor="@color/txt_gray"
@@ -144,15 +144,17 @@
                             android:layout_height="wrap_content"
                             android:orientation="horizontal">
                             <ImageView
+                                app:tint="@color/txt_black"
                                 android:src="@drawable/location_pin_alt_1_svgrepo_com"
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"/>
+                                android:layout_width="26dp"
+                                android:layout_height="26dp"/>
                             <TextView
+                                android:textColor="@color/txt_black"
                                 android:text="@string/manage_address"
                                 android:layout_gravity="center"
                                 android:layout_marginHorizontal="15dp"
-                                android:textSize="19sp"
-                                android:fontFamily="@font/roboto_medium"
+                                android:textSize="18sp"
+                                android:fontFamily="@font/roboto_regular"
                                 android:layout_width="0dp"
                                 android:layout_weight="1"
                                 android:layout_height="wrap_content"/>
@@ -171,15 +173,17 @@
                             android:layout_height="wrap_content"
                             android:orientation="horizontal">
                             <ImageView
+                                app:tint="@color/txt_black"
                                 android:src="@drawable/payment_card_svgrepo_com"
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"/>
+                                android:layout_width="26dp"
+                                android:layout_height="26dp"/>
                             <TextView
+                                android:textColor="@color/txt_black"
                                 android:text="@string/payment_method"
                                 android:layout_gravity="center"
                                 android:layout_marginHorizontal="15dp"
-                                android:textSize="19sp"
-                                android:fontFamily="@font/roboto_medium"
+                                android:textSize="18sp"
+                                android:fontFamily="@font/roboto_regular"
                                 android:layout_width="0dp"
                                 android:layout_weight="1"
                                 android:layout_height="wrap_content"/>
@@ -198,15 +202,17 @@
                             android:layout_height="wrap_content"
                             android:orientation="horizontal">
                             <ImageView
+                                app:tint="@color/txt_black"
                                 android:src="@drawable/setting_1_svgrepo_com"
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"/>
+                                android:layout_width="26dp"
+                                android:layout_height="26dp"/>
                             <TextView
-                                android:text="@string/manage_address"
+                                android:text="@string/setting"
+                                android:textColor="@color/txt_black"
                                 android:layout_gravity="center"
                                 android:layout_marginHorizontal="15dp"
-                                android:textSize="20sp"
-                                android:fontFamily="@font/roboto_medium"
+                                android:textSize="18sp"
+                                android:fontFamily="@font/roboto_regular"
                                 android:layout_width="0dp"
                                 android:layout_weight="1"
                                 android:layout_height="wrap_content"/>
@@ -220,6 +226,204 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/profile_card"
+                    android:layout_marginTop="20dp"
+                    android:layout_below="@+id/method_card"
+                    android:background="@color/white"
+                    app:cardCornerRadius="10dp"
+                    android:elevation="0.5dp"
+                    app:cardElevation="0.5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:background="@color/white"
+                        android:padding="15dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <LinearLayout
+                            android:paddingVertical="10dp"
+                            android:id="@+id/profile"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <ImageView
+                                app:tint="@color/txt_black"
+                                android:src="@drawable/ic_user"
+                                android:layout_width="26dp"
+                                android:layout_height="26dp"/>
+                            <TextView
+                                android:text="@string/profile"
+                                android:layout_gravity="center"
+                                android:textColor="@color/txt_black"
+                                android:layout_marginHorizontal="15dp"
+                                android:textSize="18sp"
+                                android:fontFamily="@font/roboto_regular"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"/>
+                            <ImageView
+                                android:src="@drawable/ios_arrow_left_svgrepo_com"
+                                android:rotation="180"
+                                android:layout_gravity="center"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"/>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_marginTop="15dp"
+                            android:paddingVertical="10dp"
+                            android:id="@+id/notification"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <ImageView
+                                app:tint="@color/txt_black"
+                                android:src="@drawable/notification_13_svgrepo_com"
+                                android:layout_width="26dp"
+                                android:layout_height="26dp"/>
+                            <TextView
+                                android:text="@string/notification"
+                                android:layout_gravity="center"
+                                android:layout_marginHorizontal="15dp"
+                                android:textSize="18sp"
+                                android:textColor="@color/txt_black"
+                                android:fontFamily="@font/roboto_regular"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"/>
+                            <ImageView
+                                android:src="@drawable/ios_arrow_left_svgrepo_com"
+                                android:rotation="180"
+                                android:layout_gravity="center"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"/>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_marginTop="15dp"
+                            android:paddingVertical="10dp"
+                            android:id="@+id/app_appearance"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <ImageView
+                                app:tint="@color/txt_black"
+                                android:src="@drawable/ic_eye_alt_svgrepo_com"
+                                android:layout_width="26dp"
+                                android:layout_height="26dp"/>
+                            <TextView
+                                android:text="@string/app_appearance"
+                                android:layout_gravity="center"
+                                android:textColor="@color/txt_black"
+                                android:layout_marginHorizontal="15dp"
+                                android:textSize="18sp"
+                                android:fontFamily="@font/roboto_regular"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"/>
+                            <ImageView
+                                android:src="@drawable/ios_arrow_left_svgrepo_com"
+                                android:rotation="180"
+                                android:layout_gravity="center"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_marginTop="15dp"
+                            android:paddingVertical="10dp"
+                            android:id="@+id/dataAnalytics"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <ImageView
+                                android:src="@drawable/ic_analysis"
+                                android:layout_width="26dp"
+                                android:layout_height="26dp"
+                                app:tint="@color/txt_black" />
+                            <TextView
+                                android:text="@string/data_analytics"
+                                android:layout_gravity="center"
+                                android:layout_marginHorizontal="15dp"
+                                android:textSize="18sp"
+                                android:fontFamily="@font/roboto_regular"
+                                android:layout_width="0dp"
+                                android:textColor="@color/txt_black"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"/>
+                            <ImageView
+                                android:src="@drawable/ios_arrow_left_svgrepo_com"
+                                android:rotation="180"
+                                android:layout_gravity="center"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"/>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_marginTop="15dp"
+                            android:paddingVertical="10dp"
+                            android:id="@+id/helpSupport"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <ImageView
+                                app:tint="@color/txt_black"
+                                android:src="@drawable/ic_file"
+                                android:layout_width="26dp"
+                                android:layout_height="26dp"/>
+                            <TextView
+                                android:text="@string/help_support"
+                                android:layout_gravity="center"
+                                android:layout_marginHorizontal="15dp"
+                                android:textSize="18sp"
+                                android:fontFamily="@font/roboto_regular"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:textColor="@color/txt_black"
+                                android:layout_height="wrap_content"/>
+                            <ImageView
+                                android:src="@drawable/ios_arrow_left_svgrepo_com"
+                                android:rotation="180"
+                                android:layout_gravity="center"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"/>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_marginTop="15dp"
+                            android:paddingVertical="10dp"
+                            android:id="@+id/logout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <ImageView
+                                android:src="@drawable/ic_logout"
+                                android:layout_width="26dp"
+                                android:layout_height="26dp"
+                                app:tint="@color/red" />
+                            <TextView
+                                android:text="@string/logout"
+                                android:layout_gravity="center"
+                                android:layout_marginHorizontal="15dp"
+                                android:textSize="18sp"
+                                android:fontFamily="@font/roboto_regular"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:textColor="@color/red"
+                                android:layout_height="wrap_content"/>
+                            <ImageView
+                                android:src="@drawable/ios_arrow_left_svgrepo_com"
+                                android:rotation="180"
+                                android:layout_gravity="center"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"/>
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+
+
+
+                </androidx.cardview.widget.CardView>
 
 
             </RelativeLayout>

@@ -297,7 +297,6 @@
                         android:id="@+id/skincare_summer_section"
                         android:gravity="center_vertical"
                         android:layout_marginTop="15dp"
-                        android:layout_above="@+id/footer"
                         android:layout_below="@+id/skincare_section"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
@@ -348,16 +347,17 @@
                         </RelativeLayout>
                     </RelativeLayout>
                     <LinearLayout
-                        android:visibility="gone"
+                        android:visibility="visible"
                         android:id="@+id/footer"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginTop="30dp"
                         android:background="@color/main_bg"
-                        android:layout_alignParentBottom="true"
+                        android:layout_below="@+id/skincare_summer_section"
                         android:gravity="center"
                         android:orientation="vertical"
+                        android:layout_marginBottom="5dp"
                         android:paddingBottom="15dp"
                         tools:ignore="UseCompoundDrawables">
 

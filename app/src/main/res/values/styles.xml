@@ -4,4 +4,9 @@
         <item name="android:color">@color/tran</item>
     </style>
 
+    <style name="checkBoxStyle" parent="Base.Theme.AppCompat">
+        <item name="colorAccent">@color/primary</item>
+        <item name="android:textColorSecondary">@color/red</item>
+    </style>
+
 </resources>

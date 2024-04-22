@@ -1,5 +1,7 @@
 package com.kh.ite.rupp.edu.trendy
 
+import android.content.Context
+import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
 import android.os.Handler
@@ -9,6 +11,7 @@ import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.kh.ite.rupp.edu.trendy.Application.MySharePreferences
 import com.kh.ite.rupp.edu.trendy.Ui.fragment.CartFragment
 import com.kh.ite.rupp.edu.trendy.Ui.fragment.HomeFragment
 import com.kh.ite.rupp.edu.trendy.Ui.fragment.OrderFragment
@@ -22,11 +25,13 @@ import kh.edu.rupp.ite.trendy.Base.BaseActivityBinding
 class MainActivity : BaseActivityBinding<ActivityMainBinding>() {
     private var STATE = 0
     private var doubleBackToExitPressedOnce = false
+    private lateinit var mySharePreferences: MySharePreferences
     override fun getLayoutViewBinding(): ActivityMainBinding =
         ActivityMainBinding.inflate(layoutInflater)
 
     override fun initView() {
         setupBottomNavbar()
+        mySharePreferences = MySharePreferences(this)
         binding.bottomNavigation.selectedItemId = R.id.home
     }
 
@@ -57,7 +62,23 @@ class MainActivity : BaseActivityBinding<ActivityMainBinding>() {
                     R.id.profile -> ProfileFragment()
                     else -> null
                 }
-
+                when(item.itemId){
+                    R.id.shop ->{
+                        STATE = 1
+                    }
+                    R.id.home ->{
+                        STATE = 0
+                    }
+                    R.id.cart -> {
+                        STATE = 2
+                    }
+                    R.id.my_order ->{
+                        STATE = 3
+                    }
+                    R.id.profile ->{
+                        STATE = 4
+                    }
+                }
                 if (fragment != null) {
                     // Replace the fragment container with the selected fragment
                     fragmentManager.beginTransaction()
@@ -94,7 +115,7 @@ class MainActivity : BaseActivityBinding<ActivityMainBinding>() {
 
                 when (item.itemId){
                     R.id.profile ->{
-                        val bottomSheetDialog = LoginBottomSheetFragment()
+                        val bottomSheetDialog = LoginBottomSheetFragment(this)
                         bottomSheetDialog.show(supportFragmentManager, "login_bottom_sheet_dialog")
                     }
                 }
@@ -131,7 +152,13 @@ class MainActivity : BaseActivityBinding<ActivityMainBinding>() {
 
     private fun isLoggedIn(): Boolean {
         // Add your logic to check if the user is logged in
-        return true  // Placeholder, replace with actual logic
+        if (mySharePreferences.getToken().isNullOrEmpty()){
+            return false
+        }
+        else{
+            return true
+        }
+        // Placeholder, replace with actual logic
     }
 
     private fun getFilledIconIdForItem(itemId: Int): Int {
@@ -246,6 +273,13 @@ class MainActivity : BaseActivityBinding<ActivityMainBinding>() {
             4 -> {
                 binding.bottomNavigation.selectedItemId = R.id.profile
             }
+        }
+    }
+
+    companion object{
+        fun lunch(context: Context){
+            val intent = Intent(context, MainActivity::class.java)
+            context.startActivity(intent)
         }
     }
 }

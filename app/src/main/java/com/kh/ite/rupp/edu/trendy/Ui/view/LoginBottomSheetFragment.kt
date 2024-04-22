@@ -1,8 +1,12 @@
 package com.kh.ite.rupp.edu.trendy.Ui.view
 
+import android.app.Activity
 import android.app.Dialog
 import android.content.res.Resources
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,17 +17,35 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.textfield.TextInputEditText
+import com.kh.ite.rupp.edu.trendy.Application.MySharePreferences
+import com.kh.ite.rupp.edu.trendy.Factory.UserViewModelFactory
+import com.kh.ite.rupp.edu.trendy.Model.UserLoginSuccessResponse
 import com.kh.ite.rupp.edu.trendy.R
+import com.kh.ite.rupp.edu.trendy.Service.MyApi
+import com.kh.ite.rupp.edu.trendy.Service.intercepter.NetworkConnectionInterceptor
+import com.kh.ite.rupp.edu.trendy.Service.repository.UserRepository
+import com.kh.ite.rupp.edu.trendy.Ui.custom.DialogX2
+import com.kh.ite.rupp.edu.trendy.Ui.custom.OnBackResponse
+import com.kh.ite.rupp.edu.trendy.Util.hideKeyboard
+import com.kh.ite.rupp.edu.trendy.ViewModel.auth.AuthViewModel
+import com.kh.ite.rupp.edu.trendy.databinding.BottomSheetLoginBinding
 
-class LoginBottomSheetFragment: BottomSheetDialogFragment() {
-    private var btnBack : ImageView?=null
-    private var signup: TextView? = null
-    private var phoneNumberEdt: TextInputEditText? = null
-    private var passwordEdt: TextInputEditText? = null
-    private var btnSignIn: AppCompatButton? = null
-
+class LoginBottomSheetFragment(private val activity: Activity): BottomSheetDialogFragment(), OnBackResponse<UserLoginSuccessResponse> {
+    private lateinit var binding: BottomSheetLoginBinding
+    private lateinit var networkConnectionInterceptor: NetworkConnectionInterceptor
+    private lateinit var api: MyApi
+    private lateinit var userRepository: UserRepository
+    private lateinit var mySharePreferences: MySharePreferences
+    private lateinit var factory: UserViewModelFactory
+    private lateinit var viewModel: AuthViewModel
+    private lateinit var dialog : DialogX2
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        dialog = DialogX2(requireContext())
+
+        initializeViewModel()
+
     }
 
     override fun onCreateView(
@@ -31,17 +53,36 @@ class LoginBottomSheetFragment: BottomSheetDialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.bottom_sheet_login, container, false)
-        btnBack = view.findViewById(R.id.back_btn_login)
-        signup = view.findViewById(R.id.sign_up)
-        btnBack?.setOnClickListener {
+        binding = BottomSheetLoginBinding.inflate(inflater, container, false)
+
+        binding.backBtnLogin.setOnClickListener {
             dismiss()
         }
-        signup?.setOnClickListener {
+        binding.signUp.setOnClickListener {
             val bottomSheetDialog = SigunUpBottomSheetFragment()
             bottomSheetDialog.show(requireActivity().supportFragmentManager, "login_bottom_sheet_dialog")
         }
-        return view
+
+
+        binding.signInBtn.setOnClickListener {
+            dialog.showProgress()
+            viewModel.login(binding.phoneEdt.text.toString(), binding.passwordEdt.text.toString())
+        }
+
+
+        binding.passwordEdt.onFocusChangeListener = View.OnFocusChangeListener { v, hasFocus ->
+            if (!hasFocus) {
+                hideKeyboard(v, activity)
+            }
+        }
+
+        binding.phoneEdt.onFocusChangeListener = View.OnFocusChangeListener { v, hasFocus ->
+            if (!hasFocus) {
+                hideKeyboard(v, activity)
+            }
+        }
+
+        return binding.root
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -57,6 +98,44 @@ class LoginBottomSheetFragment: BottomSheetDialogFragment() {
         }
 
         return dialog
+    }
+
+    private fun dism(isSuccess: Boolean){
+        if (isSuccess){
+            dismiss()
+        }
+    }
+    private fun initializeViewModel() {
+        networkConnectionInterceptor = NetworkConnectionInterceptor()
+        api = MyApi(requireContext(), networkConnectionInterceptor)
+        mySharePreferences = MySharePreferences(requireContext())
+        userRepository = UserRepository(api, mySharePreferences)
+        factory = UserViewModelFactory(userRepository)
+        viewModel = AuthViewModel(userRepository)
+        viewModel.listener = this
+//        factory = ProductDetailViewModelFactory(productRepository, productId())
+//        viewModel = ViewModelProvider(this, factory).get(ProductDetailViewModel::class.java)
+//        viewModel?.listener = this
+    }
+
+    override fun success(message: UserLoginSuccessResponse) {
+        mySharePreferences.saveToken(message.accessToken!!)
+        mySharePreferences.saveUserId(message.user!!.userId!!)
+        dialog.showSuccess("Login Success!","")
+        Handler(Looper.getMainLooper()).postDelayed({
+            if (!mySharePreferences.getToken().isNullOrEmpty()){
+                dism(true)
+
+                dialog.dismissX()
+            }
+
+        },1000)
+        Log.d("LOGIN_SC", "success activity: $message")
+    }
+
+    override fun fail(message: String) {
+        dialog.showError(getString(R.string.app_name), message)
+        Log.d("LOGIN_SC", "fail: $message")
     }
 
 }

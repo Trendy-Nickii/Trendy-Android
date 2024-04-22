@@ -1,15 +1,24 @@
 package com.kh.ite.rupp.edu.trendy.Service
 
 import android.content.Context
+import com.kh.ite.rupp.edu.trendy.Model.ListProductWithDetailByCategory
 import com.kh.ite.rupp.edu.trendy.Model.ProductListModel
 import com.kh.ite.rupp.edu.trendy.Model.SingleProductModel
+import com.kh.ite.rupp.edu.trendy.Model.SubCategoryModel
+import com.kh.ite.rupp.edu.trendy.Model.TopCategoryListModel
+import com.kh.ite.rupp.edu.trendy.Model.UserLoginBody
+import com.kh.ite.rupp.edu.trendy.Model.UserLoginSuccessResponse
+import com.kh.ite.rupp.edu.trendy.Model.UserSignUpBody
+import com.kh.ite.rupp.edu.trendy.Model.UserSignUpModel
 import com.kh.ite.rupp.edu.trendy.Service.intercepter.NetworkConnectionInterceptor
 import com.kh.ite.rupp.edu.trendy.Service.intercepter.TokenInterceptor
 import okhttp3.OkHttpClient
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.POST
 import retrofit2.http.Part
 import retrofit2.http.Path
 
@@ -26,6 +35,32 @@ interface MyApi {
     suspend fun getProductByCateId(
         @Path("id") id : String
     ): Response<ProductListModel>
+
+    @GET("categories")
+    suspend fun getTopCategory(): Response<TopCategoryListModel>
+
+    @GET("categories/{id}/subcategories")
+    suspend fun getSubCategory(
+        @Path("id") id: String
+    ): Response<SubCategoryModel>
+
+    @GET("products-detail-by-subcategory/{id}")
+    suspend fun getProductByCategory(
+        @Path("id") id: String
+    ): Response<ListProductWithDetailByCategory>
+
+    @POST("user/login/user")
+    suspend fun login(
+        @Body info: UserLoginBody
+    ): Response<UserLoginSuccessResponse>
+
+    @POST("user/create")
+    suspend fun signUp(
+        @Body info: UserSignUpBody
+    ): Response<UserSignUpModel>
+
+
+
 
     companion object{
         operator fun invoke(

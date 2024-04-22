@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/main_bg"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/app_bar_layout"
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="?actionBarSize"
+                android:elevation="0dp">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="10dp">
+
+                    <ImageView
+                        android:id="@+id/back_btn"
+                        android:layout_width="24dp"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/ios_arrow_left_svgrepo_com" />
+
+                    <TextView
+                        android:id="@+id/titleLead"
+                        android:gravity="center"
+                        android:textColor="@color/txt_black"
+                        android:textSize="22sp"
+                        android:fontFamily="@font/roboto_medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_marginVertical="10dp"
+                        android:layout_centerInParent="true"
+                        android:text="@string/product" />
+                    <ImageView
+                        android:background="@drawable/notification_bg_round"
+                        android:id="@+id/btnEdit"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:padding="6dp"
+                        android:src="@drawable/notification_13_svgrepo_com"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="15dp" />
+                </RelativeLayout>
+            </com.google.android.material.appbar.MaterialToolbar>
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cd_category"
+                android:elevation="5dp"
+                android:paddingVertical="10dp"
+                android:layout_below="@id/app_bar_layout"
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/subCategory_rec"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_below="@+id/subCategory_rec"
+                        android:layout_marginTop="10dp"
+                        android:background="@color/main_bg"
+                        android:paddingHorizontal="15dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/btn_filter"
+                            android:background="@color/tran"
+                            android:drawableStart="@drawable/filter_list"
+                            android:text="@string/filter"
+                            android:drawablePadding="10dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="40dp"/>
+
+                        <TextView
+                            android:id="@+id/filter_title"
+                            android:layout_width="0dp"
+                            android:textColor="@color/txt_black"
+                            android:textSize="14sp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"/>
+                        <ImageView
+                            android:id="@+id/list_change"
+                            android:layout_gravity="center"
+                            android:src="@drawable/grid_svgrepo_com"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"/>
+
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+            <RelativeLayout
+                android:layout_below="@id/cd_category"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <androidx.core.widget.NestedScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/product_list"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                </androidx.core.widget.NestedScrollView>
+            </RelativeLayout>
+
+
+            <View
+                android:layout_alignParentBottom="true"
+                android:layout_width="match_parent"
+                android:layout_height="10dp"/>
+        </RelativeLayout>
+    </androidx.core.widget.NestedScrollView>
+
+
+
+
+
+</RelativeLayout>

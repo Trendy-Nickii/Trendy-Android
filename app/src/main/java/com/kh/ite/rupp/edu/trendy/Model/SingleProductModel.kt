@@ -9,7 +9,7 @@ data class SingleProductModel(
     @SerializedName("available_color")
     var availableColor: List<AvailableColor?>? = listOf(),
     @SerializedName("available_size")
-    var availableSize: List<AvailableSize?>? = listOf(),
+    var availableSize: ArrayList<AvailableSize>? = arrayListOf(),
     @SerializedName("category_id")
     var categoryId: Int? = 0,
     @SerializedName("id")
@@ -17,7 +17,7 @@ data class SingleProductModel(
     @SerializedName("image")
     var image: List<Image?>? = listOf(),
     @SerializedName("items")
-    var items: List<Item?>? = listOf(),
+    var items: List<Item>? = arrayListOf(),
     @SerializedName("product_description")
     var productDescription: String? = "",
     @SerializedName("product_discount")
@@ -37,6 +37,8 @@ data class SingleProductModel(
     )
 
     data class AvailableSize(
+        @SerializedName("isActive")
+        var isActive: Boolean? = false,
         @SerializedName("amount")
         var amount: Int? = 0,
         @SerializedName("color_onSize")
@@ -70,6 +72,8 @@ data class SingleProductModel(
     )
 
     data class Item(
+        @SerializedName("isActive")
+        var isActive: Boolean? = false,
         @SerializedName("amount")
         var amount: Int? = 0,
         @SerializedName("color")

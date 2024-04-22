@@ -9,4 +9,8 @@
         <item name="android:textColorSecondary">@color/red</item>
     </style>
 
+    <style name="DialogAnimationScaleInOut">
+        <item name="android:windowEnterAnimation">@anim/dialog_scale_in</item>
+        <item name="android:windowExitAnimation">@anim/dialog_scale_out</item>
+    </style>
 </resources>

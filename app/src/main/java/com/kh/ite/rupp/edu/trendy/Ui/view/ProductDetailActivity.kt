@@ -20,7 +20,10 @@ import com.kh.ite.rupp.edu.trendy.R
 import com.kh.ite.rupp.edu.trendy.Service.MyApi
 import com.kh.ite.rupp.edu.trendy.Service.intercepter.NetworkConnectionInterceptor
 import com.kh.ite.rupp.edu.trendy.Service.repository.ProductRepository
+import com.kh.ite.rupp.edu.trendy.Ui.adapter.ProductColorListAdapter
 import com.kh.ite.rupp.edu.trendy.Ui.adapter.ProductListAdapter
+import com.kh.ite.rupp.edu.trendy.Ui.adapter.ProductSizeAdapter
+import com.kh.ite.rupp.edu.trendy.Ui.custom.AddToCartBottomSheet
 import com.kh.ite.rupp.edu.trendy.Ui.custom.OnItemClick
 import com.kh.ite.rupp.edu.trendy.Ui.custom.OnRequestResponse
 import com.kh.ite.rupp.edu.trendy.Util.calculateDiscount
@@ -29,6 +32,7 @@ import com.kh.ite.rupp.edu.trendy.Util.totalPriceFormat
 import com.kh.ite.rupp.edu.trendy.ViewModel.ProductDetailViewModel
 import com.kh.ite.rupp.edu.trendy.databinding.ActivityProductDetailBinding
 import kh.edu.rupp.ite.trendy.Base.BaseActivityBinding
+import okhttp3.internal.notifyAll
 
 class ProductDetailActivity : BaseActivityBinding<ActivityProductDetailBinding>(),
     OnRequestResponse {
@@ -40,6 +44,12 @@ class ProductDetailActivity : BaseActivityBinding<ActivityProductDetailBinding>(
     private lateinit var productRepository: ProductRepository
     private lateinit var factory: ProductDetailViewModelFactory
     private var viewModel: ProductDetailViewModel? = null
+    private var sizePro : String? = ""
+    private var colorPro: String? = ""
+    private var itemId :String? = ""
+    private var itemForColor: List<SingleProductModel.Item> = listOf()
+    private var itemList : SingleProductModel? = SingleProductModel()
+    private var productData: SingleProductModel? = SingleProductModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,17 +63,44 @@ class ProductDetailActivity : BaseActivityBinding<ActivityProductDetailBinding>(
         factory = ProductDetailViewModelFactory(productRepository, productId())
         viewModel = ViewModelProvider(this, factory).get(ProductDetailViewModel::class.java)
         viewModel?.listener = this
-
         showSkeleton()
+        val itemSize = ArrayList<SingleProductModel.Item>()
         // Observer for productOne LiveData
         viewModel?.productOne?.observe(this, Observer { singleProduct ->
             singleProduct?.let {
                 // Update UI with the received data
+                productData = it
                 initView(it)
                 viewModel?.getProductById(it.categoryId.toString())
+                for (i in singleProduct.items!!) {
+                    val newSize = i.size
+                    // Check if the size already exists in itemSize
+                    if (!itemSize.any { it.size == newSize }) {
+                        itemSize.add(i)
+                    }
+                }
+                itemSize[0].isActive = true
+                sizePro = itemSize[0].size
+                sizeList(itemSize)
+                itemList = singleProduct
+                itemForColor = filterItemsBySize(itemList!!.items!!, sizePro!!)
+                Log.d("PRODUCT_DETAIL_SIZE", "Filtered items for size = $sizePro")
+                itemForColor.forEach {
+                    Log.d("PRODUCT_DETAIL_SIZE", "item:  ${it.itemId}, ${it.color}, ${it.colorCode}, ${it.size}, ${it.amount}")
+
+                }
+                initColorList(itemForColor as ArrayList)
                 hideSkeleton()
             }
         })
+
+        binding.addToCartBtn.setOnClickListener {
+            val bottomSheet = AddToCartBottomSheet(this, sizePro, productData!!)
+            bottomSheet.show(supportFragmentManager, "Add to cart bottom sheet")
+        }
+
+
+
 
         // Debugging: Log initial state of productOne LiveData
         Log.d("PRODUCT_DETAIL", "Initial productOne value: ${viewModel?.productOne?.value}")
@@ -87,7 +124,56 @@ class ProductDetailActivity : BaseActivityBinding<ActivityProductDetailBinding>(
 
 
     }
+    private fun sizeList(item: List<SingleProductModel.Item>){
+        val data : ArrayList<SingleProductModel.Item> = item as ArrayList
+        binding.sizeRec.apply {
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            adapter = ProductSizeAdapter(context,data , object : OnItemClick<SingleProductModel.Item>{
+                override fun onItemClickListener(
+                    model: SingleProductModel.Item,
+                    position: Int
+                ) {
+                    // Set isActive flag for the clicked item to true
+                    item[position].isActive = true
+                    sizePro = model.size
+                    itemId = ""
 
+                    itemForColor = filterItemsBySize(itemList!!.items!!, sizePro!!)
+                    Log.d("PRODUCT_DETAIL_SIZE", "Filtered items for size = $sizePro")
+                    itemForColor.forEach {
+                        Log.d("PRODUCT_DETAIL_SIZE", "item:  ${it.itemId}, ${it.color}, ${it.colorCode}, ${it.size}, ${it.amount}")
+
+                    }
+                    initColorList(itemForColor as ArrayList)
+                    // Set isActive flag to false for all other items except the clicked one
+                    item.forEachIndexed { index, item ->
+                        item.isActive = (index == position)
+                    }
+
+                    // Notify adapter of the data change
+
+                    adapter?.notifyDataSetChanged()
+                }
+            })
+
+        }
+    }
+
+    private fun initColorList(item: ArrayList<SingleProductModel.Item>){
+        binding.colorRec.apply {
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            adapter = ProductColorListAdapter(context, item, object : OnItemClick<SingleProductModel.Item>{
+                override fun onItemClickListener(model: SingleProductModel.Item, position: Int) {
+
+                }
+
+            })
+        }
+    }
+
+    private fun colorList(item: ArrayList<SingleProductModel.AvailableSize.ColorOnSize>){
+
+    }
     private fun showSkeleton() {
         // Show skeleton layout
         binding.loading.visibility = View.VISIBLE
@@ -172,6 +258,9 @@ class ProductDetailActivity : BaseActivityBinding<ActivityProductDetailBinding>(
         }
     }
 
+    fun filterItemsBySize(items: List<SingleProductModel.Item>, selectedSize: String): List<SingleProductModel.Item> {
+        return items.filter { it.size == selectedSize }
+    }
 
     override fun onFailed(message: String) {
         toastHelper(message)

@@ -14,19 +14,13 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.textfield.TextInputEditText
 import com.kh.ite.rupp.edu.trendy.R
+import com.kh.ite.rupp.edu.trendy.databinding.BottomSheetLoginBinding
+import com.kh.ite.rupp.edu.trendy.databinding.BottomSheetSignupBinding
 
 class SigunUpBottomSheetFragment: BottomSheetDialogFragment() {
-    private var btnBack : ImageView?=null
-    private var checkBoxMale : CheckBox? = null
-    private var checkBoxFemale: CheckBox? = null
-    var gender: Int? = null
-    private var phoneNumberEdt: TextInputEditText? = null
-    private var firstnameEdt: TextInputEditText? = null
-    private var lastnameEdt: TextInputEditText? = null
-    private var emailEdt: TextInputEditText? = null
-    private var passwordEdt: TextInputEditText? = null
-    private var confirmPassword: TextInputEditText? = null
-    private var signIn: TextView? = null
+
+    private lateinit var binding: BottomSheetSignupBinding
+    private var gender: Int? = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,39 +31,36 @@ class SigunUpBottomSheetFragment: BottomSheetDialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.bottom_sheet_signup, container, false)
-        btnBack = view.findViewById(R.id.back_btn_login)
-        checkBoxMale = view.findViewById(R.id.gender_male)
-        checkBoxFemale = view.findViewById(R.id.gender_female)
+        binding = BottomSheetSignupBinding.inflate(inflater,container,false)
 
 
 
 
-        btnBack?.setOnClickListener {
+        binding.backBtnLogin.setOnClickListener {
             dismiss()
         }
 
 
 
-        checkBoxMale?.setOnClickListener{
-            if (checkBoxMale?.isChecked == true){
+        binding.genderMale.setOnClickListener{
+            if (binding.genderMale.isChecked == true){
                 gender = 1
-                checkBoxMale?.error = null
-                checkBoxFemale?.error = null
-                checkBoxFemale?.isChecked = false
+                binding.genderMale.error = null
+                binding.genderFemale.error = null
+                binding.genderFemale.isChecked = false
             }
             else{
                 gender = 0
             }
         }
 
-        checkBoxFemale?.setOnClickListener {
-            if (checkBoxFemale?.isChecked == true){
+        binding.genderFemale.setOnClickListener {
+            if (binding.genderFemale.isChecked){
                 gender = 2
 
-                checkBoxMale?.error = null
-                checkBoxFemale?.error = null
-                checkBoxMale?.isChecked =false
+                binding.genderMale.error = null
+                binding.genderFemale.error = null
+                binding.genderMale.isChecked =false
             }
             else{
                 gender = 0
@@ -77,7 +68,7 @@ class SigunUpBottomSheetFragment: BottomSheetDialogFragment() {
         }
 
 
-        return view
+        return binding.root
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {

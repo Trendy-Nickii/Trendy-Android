@@ -52,4 +52,12 @@
     <string name="product">Product</string>
     <string name="buy_now">Buy Now</string>
     <string name="add_to_cart">Add to Cart</string>
+    <string name="choose_product_variant">Choose Product Variant</string>
+    <string name="stock">Stock : %s</string>
+    <string name="size">Size</string>
+    <string name="color">Color</string>
+    <string name="cancel">Cancel</string>
+    <string name="ok">Ok</string>
+    <string name="categories">Categories</string>
+    <string name="filter">Filter</string>
 </resources>

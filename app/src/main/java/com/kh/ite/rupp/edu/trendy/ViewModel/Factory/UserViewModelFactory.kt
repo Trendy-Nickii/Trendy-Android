@@ -1,4 +1,4 @@
-package com.kh.ite.rupp.edu.trendy.Factory
+package com.kh.ite.rupp.edu.trendy.ViewModel.Factory
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

@@ -74,6 +74,8 @@ data class SingleProductModel(
     data class Item(
         @SerializedName("isActive")
         var isActive: Boolean? = false,
+        @SerializedName("isActiveColor")
+        var isActiveColor: Boolean? = false,
         @SerializedName("amount")
         var amount: Int? = 0,
         @SerializedName("color")

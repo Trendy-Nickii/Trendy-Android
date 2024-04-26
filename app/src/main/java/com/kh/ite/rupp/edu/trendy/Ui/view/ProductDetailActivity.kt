@@ -6,14 +6,12 @@ import android.graphics.Paint
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import androidx.activity.enableEdgeToEdge
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.models.SlideModel
-import com.kh.ite.rupp.edu.trendy.Factory.ProductDetailViewModelFactory
 import com.kh.ite.rupp.edu.trendy.Model.ProductListModel
 import com.kh.ite.rupp.edu.trendy.Model.SingleProductModel
 import com.kh.ite.rupp.edu.trendy.R
@@ -23,16 +21,15 @@ import com.kh.ite.rupp.edu.trendy.Service.repository.ProductRepository
 import com.kh.ite.rupp.edu.trendy.Ui.adapter.ProductColorListAdapter
 import com.kh.ite.rupp.edu.trendy.Ui.adapter.ProductListAdapter
 import com.kh.ite.rupp.edu.trendy.Ui.adapter.ProductSizeAdapter
-import com.kh.ite.rupp.edu.trendy.Ui.custom.AddToCartBottomSheet
 import com.kh.ite.rupp.edu.trendy.Ui.custom.OnItemClick
 import com.kh.ite.rupp.edu.trendy.Ui.custom.OnRequestResponse
 import com.kh.ite.rupp.edu.trendy.Util.calculateDiscount
 import com.kh.ite.rupp.edu.trendy.Util.toastHelper
 import com.kh.ite.rupp.edu.trendy.Util.totalPriceFormat
+import com.kh.ite.rupp.edu.trendy.ViewModel.Factory.ProductDetailViewModelFactory
 import com.kh.ite.rupp.edu.trendy.ViewModel.ProductDetailViewModel
 import com.kh.ite.rupp.edu.trendy.databinding.ActivityProductDetailBinding
 import kh.edu.rupp.ite.trendy.Base.BaseActivityBinding
-import okhttp3.internal.notifyAll
 
 class ProductDetailActivity : BaseActivityBinding<ActivityProductDetailBinding>(),
     OnRequestResponse {
@@ -95,7 +92,7 @@ class ProductDetailActivity : BaseActivityBinding<ActivityProductDetailBinding>(
         })
 
         binding.addToCartBtn.setOnClickListener {
-            val bottomSheet = AddToCartBottomSheet(this, sizePro, productData!!)
+            val bottomSheet = AddToCartBottomSheet(this, sizePro, productData!!, this)
             bottomSheet.show(supportFragmentManager, "Add to cart bottom sheet")
         }
 

@@ -60,4 +60,8 @@
     <string name="ok">Ok</string>
     <string name="categories">Categories</string>
     <string name="filter">Filter</string>
+    <string name="checkout">Checkout - $%s</string>
+    <string name="size_v">Size: %s</string>
+    <string name="color_v">Color: %s</string>
+    <string name="qty_v">Qty: %s</string>
 </resources>

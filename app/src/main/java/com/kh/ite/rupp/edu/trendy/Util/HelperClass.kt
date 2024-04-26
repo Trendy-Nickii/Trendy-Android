@@ -5,6 +5,7 @@ import android.content.Context
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import com.kh.ite.rupp.edu.trendy.Application.MySharePreferences
 import java.text.DecimalFormat
 import java.text.NumberFormat
 
@@ -23,4 +24,15 @@ fun calculateDiscount(dis: Double, unitPrice: Double): Double {
 }
 fun Context.toastHelper(message: String){
     Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+}
+
+fun isLoggedIn(context: Context): Boolean {
+    // Add your logic to check if the user is logged in
+    if (MySharePreferences(context).getToken().isNullOrEmpty()){
+        return false
+    }
+    else{
+        return true
+    }
+    // Placeholder, replace with actual logic
 }

@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.tabs.TabLayoutMediator
-import com.kh.ite.rupp.edu.trendy.Factory.ShopViewModelFactory
+import com.kh.ite.rupp.edu.trendy.ViewModel.Factory.ShopViewModelFactory
 import com.kh.ite.rupp.edu.trendy.Model.TopCategoryListModel
 import com.kh.ite.rupp.edu.trendy.R
 import com.kh.ite.rupp.edu.trendy.Service.MyApi

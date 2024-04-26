@@ -9,7 +9,7 @@ import android.view.animation.AnimationUtils
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.kh.ite.rupp.edu.trendy.Factory.ShopViewModelFactory
+import com.kh.ite.rupp.edu.trendy.ViewModel.Factory.ShopViewModelFactory
 import com.kh.ite.rupp.edu.trendy.Model.SubCategoryHandleData
 import com.kh.ite.rupp.edu.trendy.Model.SubCategoryModel
 import com.kh.ite.rupp.edu.trendy.R

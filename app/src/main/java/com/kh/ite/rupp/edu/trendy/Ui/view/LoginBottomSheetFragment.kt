@@ -10,15 +10,10 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
-import androidx.appcompat.widget.AppCompatButton
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.google.android.material.textfield.TextInputEditText
 import com.kh.ite.rupp.edu.trendy.Application.MySharePreferences
-import com.kh.ite.rupp.edu.trendy.Factory.UserViewModelFactory
 import com.kh.ite.rupp.edu.trendy.Model.UserLoginSuccessResponse
 import com.kh.ite.rupp.edu.trendy.R
 import com.kh.ite.rupp.edu.trendy.Service.MyApi
@@ -27,6 +22,7 @@ import com.kh.ite.rupp.edu.trendy.Service.repository.UserRepository
 import com.kh.ite.rupp.edu.trendy.Ui.custom.DialogX2
 import com.kh.ite.rupp.edu.trendy.Ui.custom.OnBackResponse
 import com.kh.ite.rupp.edu.trendy.Util.hideKeyboard
+import com.kh.ite.rupp.edu.trendy.ViewModel.Factory.UserViewModelFactory
 import com.kh.ite.rupp.edu.trendy.ViewModel.auth.AuthViewModel
 import com.kh.ite.rupp.edu.trendy.databinding.BottomSheetLoginBinding
 

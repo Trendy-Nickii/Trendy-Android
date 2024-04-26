@@ -15,4 +15,5 @@
     <color name="internet_disconnect">#FF0000</color>
     <color name="internet_connect">#008d45</color>
     <color name="txt_black">#FF000000</color>
+    <color name="select_capacity">#7C373737</color>
 </resources>

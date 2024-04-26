@@ -1,18 +1,16 @@
-package com.kh.ite.rupp.edu.trendy.Factory
+package com.kh.ite.rupp.edu.trendy.ViewModel.Factory
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.kh.ite.rupp.edu.trendy.Service.repository.ProductRepository
 import com.kh.ite.rupp.edu.trendy.ViewModel.HomeScreenViewModel
-import com.kh.ite.rupp.edu.trendy.ViewModel.ProductDetailViewModel
 
-class ProductDetailViewModelFactory(
-    private val productRepository: ProductRepository,
-    private val id: String
+class ProductViewModelFactory(
+    private val productRepository: ProductRepository
 ): ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(ProductDetailViewModel::class.java)){
-            return ProductDetailViewModel(productRepository, id) as T
+        if (modelClass.isAssignableFrom(HomeScreenViewModel::class.java)){
+            return HomeScreenViewModel(productRepository) as T
         }
         throw IllegalArgumentException("View Model not found")
     }

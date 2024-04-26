@@ -1,9 +1,12 @@
 package com.kh.ite.rupp.edu.trendy.Ui.custom
 
-import com.kh.ite.rupp.edu.trendy.Model.ErrorModel
-
 interface OnItemClick<T: Any> {
     fun onItemClickListener(model: T, position: Int)
+}
+
+interface OnUpdateDeleteClick<T: Any>{
+    fun onUpdateListener(model: T)
+    fun onDeleteListener(model: T)
 }
 
 

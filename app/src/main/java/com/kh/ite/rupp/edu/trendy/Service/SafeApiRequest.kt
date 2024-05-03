@@ -1,7 +1,6 @@
 package com.kh.ite.rupp.edu.trendy.Service
 
 import com.google.gson.GsonBuilder
-import com.kh.ite.rupp.edu.trendy.Model.ErrorModel
 import com.kh.ite.rupp.edu.trendy.Model.ResponseErrorModel
 import com.kh.ite.rupp.edu.trendy.Util.ApiException
 import org.json.JSONObject
@@ -23,10 +22,10 @@ abstract class SafeApiRequest {
                     val errorData = gson.fromJson(errorResponse, ResponseErrorModel::class.java) as ResponseErrorModel
                     message.append(errorData.messages!!.err)
                 }catch (e: Exception){}
-                message.append("\n")
+//                message.append("\n")
             }
 
-            message.append("Error code: ${response.code()}")
+//            message.append("Error code: ${response.code()}")
 
             throw ApiException(message.toString())
         }

@@ -1,6 +1,13 @@
 package com.kh.ite.rupp.edu.trendy.Service
 
 import android.content.Context
+import com.kh.ite.rupp.edu.trendy.Model.AddToCartBody
+import com.kh.ite.rupp.edu.trendy.Model.AddToCartResponseModel
+import com.kh.ite.rupp.edu.trendy.Model.AddressListModel
+import com.kh.ite.rupp.edu.trendy.Model.CartCheckoutSummaryModel
+import com.kh.ite.rupp.edu.trendy.Model.CartItemModel
+import com.kh.ite.rupp.edu.trendy.Model.CartUpdateModel
+import com.kh.ite.rupp.edu.trendy.Model.CreateAddressBody
 import com.kh.ite.rupp.edu.trendy.Model.ListProductWithDetailByCategory
 import com.kh.ite.rupp.edu.trendy.Model.ProductListModel
 import com.kh.ite.rupp.edu.trendy.Model.SingleProductModel
@@ -17,9 +24,10 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Body
+import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.POST
-import retrofit2.http.Part
+import retrofit2.http.PUT
 import retrofit2.http.Path
 
 interface MyApi {
@@ -59,9 +67,35 @@ interface MyApi {
         @Body info: UserSignUpBody
     ): Response<UserSignUpModel>
 
+    @POST("cart/add-to-cart")
+    suspend fun addToCart(
+        @Body info: AddToCartBody
+    ):Response<AddToCartResponseModel>
 
+    @GET("cart")
+    suspend fun getCartItem(): Response<CartItemModel>
 
+    @DELETE("cart/{id}")
+    suspend fun deleteCartItem(
+        @Path("id") id: String
+    ): Response<AddToCartResponseModel>
 
+    @PUT("cart/{id}")
+    suspend fun updateCart(
+        @Path("id") id: String,
+        @Body info: CartUpdateModel
+    ):Response<AddToCartResponseModel>
+
+    @POST("order/initiate")
+    suspend fun cartCheckout():Response<CartCheckoutSummaryModel>
+
+    @POST("address/create")
+    suspend fun createAddress(
+        @Body info: CreateAddressBody
+    ):Response<AddToCartResponseModel>
+
+    @GET("address")
+    suspend fun getListAddress():Response<AddressListModel>
     companion object{
         operator fun invoke(
             context: Context,

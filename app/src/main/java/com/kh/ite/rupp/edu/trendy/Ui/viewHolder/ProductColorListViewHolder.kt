@@ -23,6 +23,21 @@ class ProductColorListViewHolder(itemView: View):ViewHolder(itemView) {
             val color = Color.parseColor(item.colorCode)
             binding.sizeLayout.backgroundTintList = ColorStateList.valueOf(color)
 
+            if (item.isActiveColor == true){
+
+                binding.selectBg.visibility = View.VISIBLE
+                binding.ticSelect.visibility = View.VISIBLE
+
+            }
+            else{
+                binding.selectBg.visibility = View.GONE
+                binding.ticSelect.visibility = View.GONE
+            }
+
+            binding.root.setOnClickListener {
+                itemClick.onItemClickListener(item, position)
+            }
+
         }catch (_:Exception){}
     }
 }

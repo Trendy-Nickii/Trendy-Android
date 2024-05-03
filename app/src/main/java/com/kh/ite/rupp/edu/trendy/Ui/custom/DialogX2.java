@@ -251,6 +251,27 @@ public class DialogX2 {
         }
     }
 
+    public void showSuccessAddToCart(String title, String description) {
+        progressBar.setVisibility(View.GONE);
+        imageIcon.setAnimation("success.json");
+        // imageIcon.setAnimationFromUrl("https://assets7.lottiefiles.com/packages/lf20_rQvUxg.json");
+        imageIcon.setVisibility(View.VISIBLE);
+//        imageIcon.setImageDrawable(context.getDrawable(R.drawable.ic_baseline_done_outline_24));
+//        imageIcon.getDrawable().setTint(context.getResources().getColor(R.color.green_800));
+
+        imageIcon.loop(false);
+
+        lnButton.setVisibility(View.GONE);
+        tvDesc.setVisibility(View.VISIBLE);
+        tvTitle.setVisibility(View.VISIBLE);
+        tvTitle.setText(title);
+        tvDesc.setText(description);
+
+        if (!dialog.isShowing()) {
+            dialog.show();
+        }
+    }
+
     public void showSuccessonConfirmClick(String title, String description, OnCallback onCallback) {
         progressBar.setVisibility(View.GONE);
         imageIcon.setAnimation("success.json");

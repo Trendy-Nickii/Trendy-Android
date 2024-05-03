@@ -10,7 +10,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.models.SlideModel
-import com.kh.ite.rupp.edu.trendy.Factory.ProductViewModelFactory
+import com.kh.ite.rupp.edu.trendy.ViewModel.Factory.ProductViewModelFactory
 import com.kh.ite.rupp.edu.trendy.Model.ProductListModel
 import com.kh.ite.rupp.edu.trendy.R
 import com.kh.ite.rupp.edu.trendy.Service.MyApi

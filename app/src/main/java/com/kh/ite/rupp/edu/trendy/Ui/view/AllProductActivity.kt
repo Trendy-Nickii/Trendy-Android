@@ -4,15 +4,10 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.kh.ite.rupp.edu.trendy.Factory.ShopViewModelFactory
 import com.kh.ite.rupp.edu.trendy.Model.ListProductWithDetailByCategory
 import com.kh.ite.rupp.edu.trendy.Model.SubCategoryHandleData
 import com.kh.ite.rupp.edu.trendy.Model.SubCategoryModel
@@ -22,6 +17,7 @@ import com.kh.ite.rupp.edu.trendy.Service.intercepter.NetworkConnectionIntercept
 import com.kh.ite.rupp.edu.trendy.Service.repository.ShopRepository
 import com.kh.ite.rupp.edu.trendy.Ui.adapter.ProductListAdapterForGridLayout
 import com.kh.ite.rupp.edu.trendy.Ui.adapter.SubCategoryListHorizontalAdapter
+import com.kh.ite.rupp.edu.trendy.ViewModel.Factory.ShopViewModelFactory
 import com.kh.ite.rupp.edu.trendy.ViewModel.ShopViewModel
 import com.kh.ite.rupp.edu.trendy.databinding.ActivityAllProductBinding
 import kh.edu.rupp.ite.trendy.Base.BaseActivityBinding

@@ -6,11 +6,22 @@
     android:background="@drawable/size_round_bg"
     android:layout_height="50dp">
     <TextView
-        android:id="@+id/size"
+        android:id="@+id/select_bg"
         android:textSize="18sp"
+        android:background="@drawable/select_color_round_bg"
         android:textColor="@color/txt_black"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+    <TextView
+        android:id="@+id/ticSelect"
+        android:textSize="18sp"
+        android:drawableStart="@drawable/ic_tick"
+        android:textColor="@color/txt_black"
+        android:drawableTint="@color/white"
+        android:visibility="gone"
         android:layout_centerInParent="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
-
 </RelativeLayout>

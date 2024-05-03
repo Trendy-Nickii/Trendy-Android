@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.kh.ite.rupp.edu.trendy.Model.AddToCartBody
 import com.kh.ite.rupp.edu.trendy.Model.AddToCartResponseModel
+import com.kh.ite.rupp.edu.trendy.Model.CartCheckoutSummaryModel
 import com.kh.ite.rupp.edu.trendy.Model.CartItemModel
 import com.kh.ite.rupp.edu.trendy.Model.CartUpdateModel
 import com.kh.ite.rupp.edu.trendy.Model.SingleProductModel
@@ -18,6 +19,10 @@ import com.kh.ite.rupp.edu.trendy.Util.NoInternetException
 class CartViewModel(
     private val cartRepository: CartRepository
 ): ViewModel() {
+
+    private val _cartCheckout = MutableLiveData<CartCheckoutSummaryModel>()
+    val cartCheckout: LiveData<CartCheckoutSummaryModel>
+        get() = _cartCheckout
 
     private val _productOne = MutableLiveData<SingleProductModel>()
     val productOne: LiveData<SingleProductModel>
@@ -136,6 +141,35 @@ class CartViewModel(
                 listener?.fail(e.message!!)
             }
         }
+    }
+
+
+    fun checkoutCart(){
+        Coroutine.ioThanMain(
+            {
+                try {
+                    cartRepository.cartCheckout()
+
+                }catch (e: NoInternetException){
+//               Log.d("LOGIN_SC", "error: $e")
+                    listener?.fail(e.message!!)
+                    null
+                }catch (e: ApiException){
+//               Log.d("LOGIN_SC", "error: $e")
+                    listener?.fail(e.message!!)
+                    null
+                }
+
+            },
+            {
+                if (it != null){
+                    _cartCheckout.value = it
+                    listener?.success(AddToCartResponseModel("Cart Checkout"))
+                }else{
+                    listener?.fail("Fail to Load data!!")
+                }
+            }
+        )
     }
 
 

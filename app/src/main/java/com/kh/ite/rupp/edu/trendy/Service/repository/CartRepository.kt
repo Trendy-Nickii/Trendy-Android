@@ -2,6 +2,7 @@ package com.kh.ite.rupp.edu.trendy.Service.repository
 
 import com.kh.ite.rupp.edu.trendy.Model.AddToCartBody
 import com.kh.ite.rupp.edu.trendy.Model.AddToCartResponseModel
+import com.kh.ite.rupp.edu.trendy.Model.CartCheckoutSummaryModel
 import com.kh.ite.rupp.edu.trendy.Model.CartItemModel
 import com.kh.ite.rupp.edu.trendy.Model.CartUpdateModel
 import com.kh.ite.rupp.edu.trendy.Model.SingleProductModel
@@ -31,6 +32,10 @@ class CartRepository(
 
     suspend fun updateCart(id:String, body: CartUpdateModel): AddToCartResponseModel{
         return apiRequest { api.updateCart(id, body) }
+    }
+
+    suspend fun cartCheckout(): CartCheckoutSummaryModel{
+        return apiRequest { api.cartCheckout() }
     }
 
 }

@@ -21,6 +21,7 @@ import com.kh.ite.rupp.edu.trendy.Ui.adapter.CartItemAdapter
 import com.kh.ite.rupp.edu.trendy.Ui.custom.DialogX
 import com.kh.ite.rupp.edu.trendy.Ui.custom.OnBackResponse
 import com.kh.ite.rupp.edu.trendy.Ui.custom.OnUpdateDeleteClick
+import com.kh.ite.rupp.edu.trendy.Ui.view.CheckOutActivity
 import com.kh.ite.rupp.edu.trendy.Ui.view.UpdateCartBottomSheet
 import com.kh.ite.rupp.edu.trendy.Util.toastHelper
 import com.kh.ite.rupp.edu.trendy.ViewModel.CartViewModel
@@ -76,6 +77,11 @@ class CartFragment : BaseFragmentBinding<FragmentCartBinding>(), OnBackResponse<
 //                anim.duration = 1000 // Set the duration of the animation (in milliseconds)
 //                anim.startDelay = 500 // Set a delay before starting the animation (optional)
 //                anim.start()
+
+                binding.checkoutBtn.setOnClickListener {
+                    dialogX?.showProgress()
+                    viewModel?.checkoutCart()
+                }
 
             }
 
@@ -162,7 +168,7 @@ class CartFragment : BaseFragmentBinding<FragmentCartBinding>(), OnBackResponse<
     override fun success(message: AddToCartResponseModel) {
         val position = MotionToast.GRAVITY_BOTTOM
 
-        MotionToast.createColorToast(requireActivity(),"Cart Deleted🛒",
+        MotionToast.createColorToast(requireActivity(),"Cart 🛒",
             message.message!!,
             MotionToastStyle.SUCCESS,
             position,
@@ -170,7 +176,10 @@ class CartFragment : BaseFragmentBinding<FragmentCartBinding>(), OnBackResponse<
             ResourcesCompat.getFont(requireContext(),R.font.roboto_regular))
 
         viewModel?.getCartItem()
-
+        dialogX?.dismissX()
+        if (viewModel?.cartCheckout!!.value != null ){
+            CheckOutActivity.lunch(requireContext(), viewModel?.cartCheckout!!.value!!)
+        }
 
         cartAdapter?.notifyDataSetChanged()
     }

@@ -3,8 +3,11 @@ package com.kh.ite.rupp.edu.trendy.Service
 import android.content.Context
 import com.kh.ite.rupp.edu.trendy.Model.AddToCartBody
 import com.kh.ite.rupp.edu.trendy.Model.AddToCartResponseModel
+import com.kh.ite.rupp.edu.trendy.Model.AddressListModel
+import com.kh.ite.rupp.edu.trendy.Model.CartCheckoutSummaryModel
 import com.kh.ite.rupp.edu.trendy.Model.CartItemModel
 import com.kh.ite.rupp.edu.trendy.Model.CartUpdateModel
+import com.kh.ite.rupp.edu.trendy.Model.CreateAddressBody
 import com.kh.ite.rupp.edu.trendy.Model.ListProductWithDetailByCategory
 import com.kh.ite.rupp.edu.trendy.Model.ProductListModel
 import com.kh.ite.rupp.edu.trendy.Model.SingleProductModel
@@ -83,6 +86,16 @@ interface MyApi {
         @Body info: CartUpdateModel
     ):Response<AddToCartResponseModel>
 
+    @POST("order/initiate")
+    suspend fun cartCheckout():Response<CartCheckoutSummaryModel>
+
+    @POST("address/create")
+    suspend fun createAddress(
+        @Body info: CreateAddressBody
+    ):Response<AddToCartResponseModel>
+
+    @GET("address")
+    suspend fun getListAddress():Response<AddressListModel>
     companion object{
         operator fun invoke(
             context: Context,

@@ -1,0 +1,54 @@
+{
+  "version": "simplified",
+  "scale": "1",
+  "settings": {
+    "landColor": "#f0f0f0",
+    "waterColor": "#00bfff",
+    "borderColor": "#ffffff",
+    "labelTextSize": "0",
+    "roadTextColor": "#ffffff",
+    "roadColor": "#808080",
+    "roadWidth": "1"
+  },
+  "layers": [
+    {
+      "id": "background",
+      "type": "background",
+      "paint": {
+        "background-color": "{landColor}"
+      }
+    },
+    {
+      "id": "water",
+      "type": "water",
+      "paint": {
+        "water-color": "{waterColor}"
+      }
+    },
+    {
+      "id": "border",
+      "type": "border",
+      "paint": {
+        "border-color": "{borderColor}"
+      }
+    },
+    {
+      "id": "road",
+      "type": "road",
+      "paint": {
+        "road-text-color": "{roadTextColor}",
+        "road-color": "{roadColor}",
+        "road-width": "{roadWidth}"
+      }
+    },
+    {
+      "id": "label",
+      "type": "label",
+      "paint": {
+        "text-color": "#ffffff",
+        "text-halo-color": "#000000",
+        "text-halo-width": "1"
+      }
+    }
+  ]
+}

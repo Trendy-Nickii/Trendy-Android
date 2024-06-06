@@ -20,7 +20,7 @@ import kh.edu.rupp.ite.trendy.Base.BaseActivityBinding
 
 
 class MainActivity : BaseActivityBinding<ActivityMainBinding>() {
-    private var STATE = 0
+
     private var doubleBackToExitPressedOnce = false
     private lateinit var mySharePreferences: MySharePreferences
     override fun getLayoutViewBinding(): ActivityMainBinding =
@@ -278,6 +278,7 @@ class MainActivity : BaseActivityBinding<ActivityMainBinding>() {
     }
 
     companion object{
+        var STATE = 0
         fun lunch(context: Context){
             val intent = Intent(context, MainActivity::class.java)
             context.startActivity(intent)

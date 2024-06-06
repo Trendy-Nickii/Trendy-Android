@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/main_bg"
+    tools:context=".Ui.fragment.OrderHistoryFragment">
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_margin="15dp"
+        android:id="@+id/ordering_rec"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+
+    <TextView
+        android:id="@+id/no_data"
+        android:visibility="gone"
+        android:gravity="center"
+        android:textSize="18sp"
+        android:fontFamily="@font/roboto_regular"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/loading"
+        android:visibility="gone"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/skeleto_animation"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</RelativeLayout>

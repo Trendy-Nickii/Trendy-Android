@@ -30,6 +30,11 @@ class CartItemAdapter (
         holder.onBin(mItem[position], itemClick, position)
     }
 
+    fun removeItem(position: Int){
+        mItem.removeAt(position)
+        notifyDataSetChanged()
+    }
+
     fun addLastItemMargin(recyclerView: RecyclerView, marginInPx: Int) {
         recyclerView.addItemDecoration(LastItemMarginDecorator(context, marginInPx))
     }

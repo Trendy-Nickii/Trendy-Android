@@ -5,10 +5,14 @@ interface OnItemClick<T: Any> {
 }
 
 interface OnUpdateDeleteClick<T: Any>{
-    fun onUpdateListener(model: T)
-    fun onDeleteListener(model: T)
+    fun onUpdateListener(model: T, position: Int)
+    fun onDeleteListener(model: T, position: Int)
+
 }
 
+interface OnDeleteClick<T: Any>{
+    fun onDeleteListenerWithPos(model: T, position: Int)
+}
 
 interface OnRequestResponse{
     fun onFailed(message: String)

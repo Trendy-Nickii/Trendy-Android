@@ -14,7 +14,9 @@ data class CartCheckoutSummaryModel(
         @SerializedName("items")
         var items: ArrayList<Item>? = arrayListOf(),
         @SerializedName("totalAmount")
-        var totalAmount: Double? = 0.0
+        var totalAmount: Double? = 0.0,
+        @SerializedName("totalAmount_after_discount")
+        var totalAmountAfterDiscount: Double? = 0.0
     ):Serializable {
         data class Item(
             @SerializedName("cart_id")

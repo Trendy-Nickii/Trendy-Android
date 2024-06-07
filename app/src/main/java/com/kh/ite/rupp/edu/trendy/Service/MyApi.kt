@@ -15,6 +15,7 @@ import com.kh.ite.rupp.edu.trendy.Model.ProductListModel
 import com.kh.ite.rupp.edu.trendy.Model.SingleProductModel
 import com.kh.ite.rupp.edu.trendy.Model.SubCategoryModel
 import com.kh.ite.rupp.edu.trendy.Model.TopCategoryListModel
+import com.kh.ite.rupp.edu.trendy.Model.UserInfoModel
 import com.kh.ite.rupp.edu.trendy.Model.UserLoginBody
 import com.kh.ite.rupp.edu.trendy.Model.UserLoginSuccessResponse
 import com.kh.ite.rupp.edu.trendy.Model.UserOrderingModel
@@ -126,6 +127,9 @@ interface MyApi {
 
     @GET("order/ordering-history")
     suspend fun getUserOrderingHistory():Response<UserOrderingModel>
+
+    @GET("user/get-one")
+    suspend fun getUserInfo(): Response<UserInfoModel>
 
     companion object{
         operator fun invoke(

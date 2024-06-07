@@ -3,6 +3,7 @@ package com.kh.ite.rupp.edu.trendy.ViewModel.auth
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.kh.ite.rupp.edu.trendy.Model.UserInfoModel
 import com.kh.ite.rupp.edu.trendy.Model.UserLoginSuccessResponse
 import com.kh.ite.rupp.edu.trendy.Model.UserSignUpBody
 import com.kh.ite.rupp.edu.trendy.Model.UserSignUpModel
@@ -31,6 +32,10 @@ class AuthViewModel(
     var listener : OnBackResponse<UserLoginSuccessResponse>? = null
     var listenerB : OnBackResponse<UserSignUpModel>? = null
 
+
+    private val _userInfo = MutableLiveData<UserInfoModel>()
+    val userInfo : LiveData<UserInfoModel>
+        get() = _userInfo
 
     fun login(phone: String, password: String){
         if (phone.isEmpty() || password.isEmpty()) {
@@ -74,6 +79,34 @@ class AuthViewModel(
                 listenerB?.fail(e.message!!)
             }
         }
+    }
+
+
+
+
+    fun getUserInfo(){
+        Coroutine.ioThanMain(
+            {
+                try {
+                   userRepository.getUserInfo()
+                }catch (e: NoInternetException){
+//               Log.d("LOGIN_SC", "error: $e")
+                    listener?.fail(e.message!!)
+                    null
+                }catch (e: ApiException){
+//               Log.d("LOGIN_SC", "error: $e")
+                    listener?.fail(e.message!!)
+                    null
+                }
+            },
+            {
+                if (it != null){
+                    _userInfo.value = it
+                }else{
+
+                }
+            }
+        )
     }
 
 

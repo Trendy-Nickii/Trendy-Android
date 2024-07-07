@@ -85,4 +85,9 @@
     <string name="recipient_s_phone_number">Recipient\'s Phone Number</string>
     <string name="save">Save</string>
     <string name="change_address">Change Address</string>
+    <string name="total_after_discount">Total after discount</string>
+    <string name="choose_delivery_method">Choose Delivery Method</string>
+    <string name="delivery_fee">Delivery Fee</string>
+    <string name="order">Order</string>
+    <string name="total_shopping">Total Shopping</string>
 </resources>

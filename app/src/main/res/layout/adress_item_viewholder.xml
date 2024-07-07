@@ -25,6 +25,13 @@
                 android:text=""
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
+            <ImageView
+                android:id="@+id/delete"
+                android:src="@drawable/trash_bin_2_svgrepo_com"
+                android:layout_alignParentEnd="true"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                app:tint="@color/red" />
         </RelativeLayout>
         <View
             android:layout_marginTop="15dp"
@@ -92,7 +99,7 @@
 
         <TextView
             android:layout_marginTop="20dp"
-            android:id="@+id/addToCart_btn"
+            android:id="@+id/change_btn"
             android:background="@drawable/btn_round_small_green"
             android:elevation="0dp"
             android:gravity="center"

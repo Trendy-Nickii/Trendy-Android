@@ -16,4 +16,9 @@
     <color name="internet_connect">#008d45</color>
     <color name="txt_black">#FF000000</color>
     <color name="select_capacity">#7C373737</color>
+
+    <color name="pending">#FFC107</color>
+    <color name="confirm">#FF5722</color>
+    <color name="shipped">#03A9F4</color>
+
 </resources>

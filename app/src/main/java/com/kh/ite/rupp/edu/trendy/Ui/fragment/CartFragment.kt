@@ -1,16 +1,21 @@
 package com.kh.ite.rupp.edu.trendy.Ui.fragment
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.kh.ite.rupp.edu.trendy.MainActivity.Companion.STATE
 import com.kh.ite.rupp.edu.trendy.Model.AddToCartResponseModel
 import com.kh.ite.rupp.edu.trendy.Model.CartItemModel
 import com.kh.ite.rupp.edu.trendy.R
@@ -41,6 +46,11 @@ class CartFragment : BaseFragmentBinding<FragmentCartBinding>(), OnBackResponse<
     private var viewModel: CartViewModel? = null
     private var cartAdapter : CartItemAdapter? = null
     private var dialogX : DialogX? = null
+    private var positionDelete = 0
+    var isDelete = false
+    var isDeleteState = false
+    private var checkoutResult : ActivityResultLauncher<Intent>? = null
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -63,7 +73,6 @@ class CartFragment : BaseFragmentBinding<FragmentCartBinding>(), OnBackResponse<
 
         viewModel?.itemCart?.observe(viewLifecycleOwner, Observer { cartItems ->
             hideSkeleton()
-
             Log.i("CRD", "cart = $cartItems ")
             if (cartItems.cart.isNullOrEmpty()) {
                 binding.recCart.visibility = View.GONE
@@ -71,7 +80,11 @@ class CartFragment : BaseFragmentBinding<FragmentCartBinding>(), OnBackResponse<
                 binding.noData.text = "Your cart is Empty"
                 binding.checkoutBtn.visibility = View.GONE
             } else {
-                itemCartRec(cartItems.cart!!)
+                if (!isDeleteState){
+                    itemCartRec(cartItems.cart!!)
+                    binding.checkoutBtn.visibility = View.VISIBLE
+                }
+
                 checkOut(cartItems)
 //                val anim = ObjectAnimator.ofFloat(binding.checkoutBtn, "alpha", 0f, 1f)
 //                anim.duration = 1000 // Set the duration of the animation (in milliseconds)
@@ -84,9 +97,19 @@ class CartFragment : BaseFragmentBinding<FragmentCartBinding>(), OnBackResponse<
                 }
 
             }
-
         })
 
+
+        checkoutResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ result : ActivityResult ->
+            if (result.data != null){
+
+                val data = result.data?.extras?.getSerializable("DATA_BACK") as String
+
+                STATE  = 3
+
+            }
+
+        }
 
 
     }
@@ -106,7 +129,7 @@ class CartFragment : BaseFragmentBinding<FragmentCartBinding>(), OnBackResponse<
             layoutAnimation = animationLayout
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
              cartAdapter = CartItemAdapter(context, item, object : OnUpdateDeleteClick<CartItemModel.Cart>{
-                override fun onUpdateListener(model: CartItemModel.Cart) {
+                override fun onUpdateListener(model: CartItemModel.Cart, position:Int) {
                     val bottomSheet = UpdateCartBottomSheet(
                         context,
                         sizeSelect = model.size,
@@ -132,12 +155,14 @@ class CartFragment : BaseFragmentBinding<FragmentCartBinding>(), OnBackResponse<
                     )
                     bottomSheet.show(requireFragmentManager(), "update fragment bottomSheet")
                 }
-
-                override fun onDeleteListener(model: CartItemModel.Cart) {
+                override fun onDeleteListener(model: CartItemModel.Cart, position:Int) {
                     DialogX(context).showQuestion(
                         "Remaining",
                         "Are you sure to delete this item!"
                     ){
+                        isDelete = true
+                        positionDelete = position
+                        isDeleteState = true
                         viewModel?.deleteCartItem(model.cartId.toString())
                     }
 
@@ -145,8 +170,8 @@ class CartFragment : BaseFragmentBinding<FragmentCartBinding>(), OnBackResponse<
 
             })
             adapter = cartAdapter
-            val marginInPx = resources.getDimensionPixelSize(R.dimen.margin_bottom_last_item)
-            cartAdapter?.addLastItemMargin(binding.recCart, marginInPx)
+//            val marginInPx = resources.getDimensionPixelSize(R.dimen.margin_bottom_last_item)
+//            cartAdapter?.addLastItemMargin(binding.recCart, marginInPx)
         }
     }
     private fun showSkeleton() {
@@ -175,13 +200,25 @@ class CartFragment : BaseFragmentBinding<FragmentCartBinding>(), OnBackResponse<
             MotionToast.LONG_DURATION,
             ResourcesCompat.getFont(requireContext(),R.font.roboto_regular))
 
-        viewModel?.getCartItem()
+        if (isDelete){
+            isDelete = false
+            cartAdapter?.removeItem(positionDelete)
+        }
         dialogX?.dismissX()
         if (viewModel?.cartCheckout!!.value != null ){
-            CheckOutActivity.lunch(requireContext(), viewModel?.cartCheckout!!.value!!)
+//            CheckOutActivity.lunch(requireContext(), viewModel?.cartCheckout!!.value!!)
+            val intent = Intent(requireContext(), CheckOutActivity::class.java)
+            intent.putExtra("DATA",  viewModel?.cartCheckout!!.value!!)
+            checkoutResult?.launch(intent)
+
         }
 
-        cartAdapter?.notifyDataSetChanged()
+        viewModel?.getCartItem()
+//        viewModel?.itemCart?.observe(viewLifecycleOwner, Observer { cartItems ->
+//
+//            checkOut(cartItems)
+//
+//        })
     }
 
     override fun fail(message: String) {

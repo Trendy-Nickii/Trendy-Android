@@ -1,6 +1,7 @@
 package com.kh.ite.rupp.edu.trendy.Service.repository
 
 import com.kh.ite.rupp.edu.trendy.Application.MySharePreferences
+import com.kh.ite.rupp.edu.trendy.Model.UserInfoModel
 import com.kh.ite.rupp.edu.trendy.Model.UserLoginBody
 import com.kh.ite.rupp.edu.trendy.Model.UserLoginSuccessResponse
 import com.kh.ite.rupp.edu.trendy.Model.UserSignUpBody
@@ -17,5 +18,9 @@ class UserRepository(
     }
     suspend fun userSignup(userInfo: UserSignUpBody): UserSignUpModel{
         return apiRequest { api.signUp(userInfo)}
+    }
+
+    suspend fun getUserInfo(): UserInfoModel{
+        return apiRequest { api.getUserInfo() }
     }
 }

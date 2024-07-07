@@ -8,6 +8,10 @@ import android.widget.Toast
 import com.kh.ite.rupp.edu.trendy.Application.MySharePreferences
 import java.text.DecimalFormat
 import java.text.NumberFormat
+import java.time.ZoneId
+import java.time.ZonedDateTime
+import java.time.format.DateTimeFormatter
+import java.util.Locale
 
 fun hideKeyboard(view: View, activity: Activity) {
     val inputMethodManager = activity.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager?
@@ -35,4 +39,30 @@ fun isLoggedIn(context: Context): Boolean {
         return true
     }
     // Placeholder, replace with actual logic
+}
+
+
+fun dateFormat(date: String): String {
+    val inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSX", Locale.ENGLISH)
+    val timeFormatter = DateTimeFormatter.ofPattern("hh:mm a", Locale.ENGLISH)
+    val fullFormatter = DateTimeFormatter.ofPattern("EEEE, MMM dd, yyyy 'at' hh:mm a", Locale.ENGLISH)
+
+    // Parse the input date string
+    val dateTime = ZonedDateTime.parse(date, inputFormatter).withZoneSameInstant(ZoneId.systemDefault())
+
+    // Get the current date and time
+    val currentDateTime = ZonedDateTime.now(ZoneId.systemDefault())
+
+    // Determine if the date is today, yesterday, or earlier
+    val isToday = dateTime.toLocalDate().isEqual(currentDateTime.toLocalDate())
+    val isYesterday = dateTime.toLocalDate().isEqual(currentDateTime.minusDays(1).toLocalDate())
+
+    // Format the date accordingly
+    val finalFormattedDate = when {
+        isToday -> "Today at ${dateTime.format(timeFormatter)}"
+        isYesterday -> "Yesterday at ${dateTime.format(timeFormatter)}"
+        else -> dateTime.format(fullFormatter)
+    }
+
+    return finalFormattedDate
 }

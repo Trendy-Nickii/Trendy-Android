@@ -37,10 +37,10 @@ class CartItemViewHolder(itemView: View, private val context: Context): Recycler
 
 
             binding.edit.setOnClickListener {
-                itemClick.onUpdateListener(item)
+                itemClick.onUpdateListener(item, position)
             }
             binding.delete.setOnClickListener {
-                itemClick.onDeleteListener(item)
+                itemClick.onDeleteListener(item, position)
             }
 
         }catch (_: Exception){}

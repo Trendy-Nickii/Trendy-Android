@@ -5,7 +5,9 @@ import com.kh.ite.rupp.edu.trendy.Model.AddToCartResponseModel
 import com.kh.ite.rupp.edu.trendy.Model.CartCheckoutSummaryModel
 import com.kh.ite.rupp.edu.trendy.Model.CartItemModel
 import com.kh.ite.rupp.edu.trendy.Model.CartUpdateModel
+import com.kh.ite.rupp.edu.trendy.Model.OrderBody
 import com.kh.ite.rupp.edu.trendy.Model.SingleProductModel
+import com.kh.ite.rupp.edu.trendy.Model.UserOrderingModel
 import com.kh.ite.rupp.edu.trendy.Service.MyApi
 import com.kh.ite.rupp.edu.trendy.Service.SafeApiRequest
 
@@ -37,5 +39,20 @@ class CartRepository(
     suspend fun cartCheckout(): CartCheckoutSummaryModel{
         return apiRequest { api.cartCheckout() }
     }
+
+    suspend fun ordering(body: OrderBody):AddToCartResponseModel{
+        return apiRequest { api.ordering(body) }
+    }
+
+
+    suspend fun getUserOrdering(): UserOrderingModel{
+        return apiRequest { api.getUserOrdering() }
+    }
+
+
+    suspend fun getUserOrderingHistory(): UserOrderingModel{
+        return apiRequest { api.getUserOrderingHistory() }
+    }
+
 
 }

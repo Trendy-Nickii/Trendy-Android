@@ -75,6 +75,7 @@
 
     <TextView
         android:id="@+id/checkout_btn"
+        android:visibility="gone"
         android:background="@drawable/btn_round_v2"
         android:backgroundTint="@color/primary"
         android:elevation="0dp"

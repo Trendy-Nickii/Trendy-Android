@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginVertical="5dp"
+    android:elevation="0dp"
+    android:id="@+id/card_item"
+    android:background="@drawable/address_item_bg_round_white_noborder"
+    app:cardElevation="0dp"
+    app:cardCornerRadius="15dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:padding="15dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:id="@+id/img_delivery"
+                        android:src="@drawable/food_panda_log"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"/>
+
+                    <TextView
+                        android:id="@+id/delivery_method"
+                        android:textSize="16sp"
+                        android:layout_marginStart="10dp"
+                        android:textColor="@color/txt_black"
+                        android:fontFamily="@font/roboto_regular"
+                        android:text="Grap"
+                        android:layout_gravity="center_vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+            </LinearLayout>
+            <ImageView
+                android:id="@+id/isSelect"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/ic_tick"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                app:tint="@color/primary" />
+        </LinearLayout>
+
+
+
+<!--        <TextView-->
+<!--            android:layout_marginTop="20dp"-->
+<!--            android:id="@+id/change_btn"-->
+<!--            android:background="@drawable/btn_round_small_green"-->
+<!--            android:elevation="0dp"-->
+<!--            android:gravity="center"-->
+<!--            android:text="@string/change_address"-->
+<!--            android:textSize="16sp"-->
+<!--            android:fontFamily="@font/roboto_medium"-->
+<!--            android:textColor="@color/primary"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="55dp"/>-->
+
+    </LinearLayout>
+
+</RelativeLayout>

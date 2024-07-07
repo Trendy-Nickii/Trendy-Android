@@ -2,12 +2,15 @@ package com.kh.ite.rupp.edu.trendy.Model
 
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class AddressListModel(
     @SerializedName("address")
     var address: ArrayList<Addres>? = arrayListOf()
-) {
+):Serializable {
     data class Addres(
+        @SerializedName("isSelect")
+        var isSelect: Boolean? = false,
         @SerializedName("address_line")
         var addressLine: String? = "",
         @SerializedName("address_name")
@@ -30,5 +33,5 @@ data class AddressListModel(
         var updatedAt: String? = "",
         @SerializedName("user_id")
         var userId: Int? = 0
-    )
+    ):Serializable
 }

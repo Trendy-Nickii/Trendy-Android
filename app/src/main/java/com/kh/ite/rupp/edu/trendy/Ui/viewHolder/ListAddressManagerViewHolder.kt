@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.kh.ite.rupp.edu.trendy.Model.AddressListModel
+import com.kh.ite.rupp.edu.trendy.Ui.custom.OnDeleteClick
 import com.kh.ite.rupp.edu.trendy.Ui.custom.OnItemClick
 import com.kh.ite.rupp.edu.trendy.databinding.AdressItemViewholderBinding
 
@@ -14,6 +15,7 @@ class ListAddressManagerViewHolder(itemView: View): RecyclerView.ViewHolder(item
     fun onBind(
         item: AddressListModel.Addres,
         itemClick: OnItemClick<AddressListModel.Addres>,
+        delete: OnDeleteClick<AddressListModel.Addres>,
         position: Int
     ){
         try {
@@ -24,6 +26,13 @@ class ListAddressManagerViewHolder(itemView: View): RecyclerView.ViewHolder(item
             item.addressLine?.let { binding.addressLine.text = it }
             item.khan?.let { binding.point.text = it }
 
+
+            binding.changeBtn.setOnClickListener {
+                itemClick.onItemClickListener(item, position)
+            }
+            binding.delete.setOnClickListener {
+                delete.onDeleteListenerWithPos(item,position)
+            }
 
         }catch (_:Exception){}
     }

@@ -9,7 +9,9 @@ import com.kh.ite.rupp.edu.trendy.Model.AddToCartResponseModel
 import com.kh.ite.rupp.edu.trendy.Model.CartCheckoutSummaryModel
 import com.kh.ite.rupp.edu.trendy.Model.CartItemModel
 import com.kh.ite.rupp.edu.trendy.Model.CartUpdateModel
+import com.kh.ite.rupp.edu.trendy.Model.OrderBody
 import com.kh.ite.rupp.edu.trendy.Model.SingleProductModel
+import com.kh.ite.rupp.edu.trendy.Model.UserOrderingModel
 import com.kh.ite.rupp.edu.trendy.Service.repository.CartRepository
 import com.kh.ite.rupp.edu.trendy.Ui.custom.OnBackResponse
 import com.kh.ite.rupp.edu.trendy.Util.ApiException
@@ -23,6 +25,16 @@ class CartViewModel(
     private val _cartCheckout = MutableLiveData<CartCheckoutSummaryModel>()
     val cartCheckout: LiveData<CartCheckoutSummaryModel>
         get() = _cartCheckout
+
+    private val _ordering = MutableLiveData<UserOrderingModel>()
+
+    val ordering : LiveData<UserOrderingModel>
+        get() = _ordering
+
+    private val _orderingHistory = MutableLiveData<UserOrderingModel>()
+
+    val orderingHistory : LiveData<UserOrderingModel>
+        get() = _orderingHistory
 
     private val _productOne = MutableLiveData<SingleProductModel>()
     val productOne: LiveData<SingleProductModel>
@@ -171,6 +183,72 @@ class CartViewModel(
             }
         )
     }
+    fun ordering(body: OrderBody){
+        Coroutine.main {
+            try {
+                val ordering = cartRepository.ordering(body)
+                ordering.message?.let {
+                    listener?.success(ordering)
+                }
+            }catch (e: NoInternetException){
+                listener?.fail(e.message!!)
+            }catch (e: ApiException){
+                listener?.fail(e.message!!)
+            }
+        }
+    }
 
+
+    fun getUserOrdering(){
+        Coroutine.ioThanMain(
+            {
+                try {
+                    cartRepository.getUserOrdering()
+                }catch (e: NoInternetException){
+//               Log.d("LOGIN_SC", "error: $e")
+                    listener?.fail(e.message!!)
+                    null
+                }catch (e: ApiException){
+//               Log.d("LOGIN_SC", "error: $e")
+                    listener?.fail(e.message!!)
+                    null
+                }
+            },
+            {
+                if (it != null){
+                    _ordering.value = it
+                }else{
+                    listener?.fail("Fail to Load data!!")
+                }
+
+            }
+        )
+    }
+
+    fun getUserOrderingHistory(){
+        Coroutine.ioThanMain(
+            {
+                try {
+                    cartRepository.getUserOrderingHistory()
+                }catch (e: NoInternetException){
+//               Log.d("LOGIN_SC", "error: $e")
+                    listener?.fail(e.message!!)
+                    null
+                }catch (e: ApiException){
+//               Log.d("LOGIN_SC", "error: $e")
+                    listener?.fail(e.message!!)
+                    null
+                }
+            },
+            {
+                if (it != null){
+                    _orderingHistory.value = it
+                }else{
+                    listener?.fail("Fail to Load data!!")
+                }
+
+            }
+        )
+    }
 
 }

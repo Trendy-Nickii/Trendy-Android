@@ -19,6 +19,12 @@
         android:theme="@style/Theme.Trendy"
         tools:targetApi="31">
         <activity
+            android:name=".Ui.view.DeliveryMethodActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Ui.view.PaymentMethodActivity"
+            android:exported="false" />
+        <activity
             android:name=".Ui.view.AddressDetailActivity"
             android:exported="false" />
         <activity
